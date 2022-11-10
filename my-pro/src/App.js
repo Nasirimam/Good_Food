@@ -1,10 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import AllRoutes from "./AllRoutes/AllRoutes";
+import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello Nasir</h1>
+      <Navbar />
+
+      <AllRoutes />
+
+      <Footer />
     </div>
   );
 }
