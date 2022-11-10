@@ -20,9 +20,9 @@ const AppContextProvider = ({ children }) => {
     setCart([...cart, data]);
   };
 
-  const totalPrice = (price) => {
-    setTotal(total + price);
-  };
+  const setAfterDelete= (data) => {
+    setCart(data)
+  }
 
   const value = {
     isAuth,
@@ -31,7 +31,8 @@ const AppContextProvider = ({ children }) => {
     Login,
     Logout,
     setProduct,
-    totalPrice,
+    setTotal,
+    setAfterDelete,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

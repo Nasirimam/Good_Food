@@ -45,8 +45,9 @@ const Footer = () => {
     <Box h="450px" border="0px solid " maxW="90%" margin="auto">
       <Flex maxW="15%" alignItems="center" gap="20px">
         <Image
-          src="https://img.freepik.com/free-psd/logo-mockup_35913-2089.jpg?w=2000"
+          src="https://img.freepik.com/premium-vector/premium-restaurant-cafe-logo-vector-illustration-design-restaurant-cafe-exclusive-logo-design-modern-vintage-restaurant-logo-concept-creative-fork-knife-logo-design-inspiration_616557-32.jpg"
           alt="MyLogo"
+          borderRadius='100%'
         />
       </Flex>
       <HStack spacing="24px" marginTop={7}>
@@ -55,7 +56,7 @@ const Footer = () => {
             USEFULL LINKS
           </Heading>
           {useFulllinks.map((elem) => (
-            <p>{elem}</p>
+            <p key={elem} >{elem}</p>
           ))}
         </Box>
         <Box w="18%" h="300px" textAlign="justify">
@@ -82,7 +83,7 @@ const Footer = () => {
             CONTACT US
           </Heading>
           {contectlinks.map((elem) => (
-            <p>{elem}</p>
+            <p key={elem} >{elem}</p>
           ))}
         </Box>
         <Box w="18%" h="300px" textAlign="justify">
@@ -90,7 +91,7 @@ const Footer = () => {
             T&C
           </Heading>
           {Boxitems.map((elem) => (
-            <p>{elem}</p>
+            <p key={elem} >{elem}</p>
           ))}
         </Box>
         <Box w="14%" h="300px" textAlign="justify">

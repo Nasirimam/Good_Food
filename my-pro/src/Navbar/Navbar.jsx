@@ -1,10 +1,17 @@
 import { Box, Container, HStack, Image, Input, Spacer } from "@chakra-ui/react";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import DrawerCart from "./cartDrower";
 import CatagoryPop from "./Catagorypop";
 import DrawerLogin from "./logindrowr";
 
 const Navbar = () => {
+
+  const navigate = useNavigate()
+
+  const handleHomeNav = () => {
+    navigate("/")
+  }
+
   return (
     <div className="navBar">
       <HStack
@@ -16,21 +23,18 @@ const Navbar = () => {
         h={20}
       >
         <Spacer />
-        <Box h="100%">
+        <Box h="100%" cursor='pointer' onClick={handleHomeNav}>
           <Image
             w="100%"
             h="100%"
-            src="https://img.freepik.com/free-psd/logo-mockup_35913-2089.jpg?w=2000"
+            borderRadius='100%'
+            src="https://img.freepik.com/premium-vector/premium-restaurant-cafe-logo-vector-illustration-design-restaurant-cafe-exclusive-logo-design-modern-vintage-restaurant-logo-concept-creative-fork-knife-logo-design-inspiration_616557-32.jpg"
             alt="MY LOGO"
           />
         </Box>
         <Spacer />
         <Box>
           <Input
-            bgColor="red.50"
-            _hover={{ bgColor: "red.100" }}
-            variant="filled"
-            focusBorderColor="#F56565"
             placeholder="Search Your Delicious Food"
             size="md"
             htmlSize={40}

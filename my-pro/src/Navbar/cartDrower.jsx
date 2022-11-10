@@ -13,22 +13,28 @@ import {
   VStack,
   Image,
   Heading,
-  Flex,
-  Center,
-
 } from "@chakra-ui/react";
+
 import React from "react";
 import { useContext } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { AppContext } from "../AuthContext/AuthContext";
+import OrderConfirm from "./OrderConfirm";
 
 function DrawerCart() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  const { cart,total } = useContext(AppContext);
+  const { cart, total, setAfterDelete, setTotal } = useContext(AppContext);
 
-  console.log(cart);
+  const deleteItem = (id) => {
+    let value = cart.filter((elem) => elem.id !== id);
+    setAfterDelete(value);
+    const sum = value.reduce((accumulator, object) => {
+      return accumulator + object.price;
+    }, 0);
+    setTotal(sum);
+  };
 
   return (
     <>
@@ -53,24 +59,47 @@ function DrawerCart() {
           <DrawerHeader>Your Orders</DrawerHeader>
 
           <DrawerBody>
-            <VStack>
+            <VStack gap={3}>
               {cart.map((elem) => (
-                <Box display='flex' border='1px solid' w='420px' h='90px' alignItems='center' p={2} gap={3} >
-                  <Image src={elem.img} alt={elem.name} w='20%' />
-                  <Heading size='xs' w='35%'>Name: {elem.name}</Heading>
-                  <Heading size='xs' w='20%'>MRP: ${elem.price}</Heading>
-                  <Button size='sm' w='20%'>Remove</Button>
+                <Box
+                  display="flex"
+                  boxShadow="dark-lg"
+                  border="0px solid"
+                  w="420px"
+                  h="90px"
+                  alignItems="center"
+                  p={2}
+                  gap={3}
+                >
+                  <Image src={elem.img} alt={elem.name} w="20%" />
+                  <Heading size="xs" w="35%">
+                    Name: {elem.name}
+                  </Heading>
+                  <Heading size="xs" w="20%">
+                    MRP: ${elem.price}
+                  </Heading>
+                  <Button
+                    onClick={() => {
+                      deleteItem(elem.id);
+                    }}
+                    size="sm"
+                    w="20%"
+                  >
+                    Remove
+                  </Button>
                 </Box>
               ))}
             </VStack>
           </DrawerBody>
 
           <DrawerFooter>
-            <Heading size='md' mr={120}>Total: ${total}</Heading>
+            <Heading size="md" mr={120}>
+              Total: ${total}
+            </Heading>
             <Button variant="outline" mr={4} onClick={onClose}>
               Back
             </Button>
-            <Button colorScheme="blue">Order</Button>
+            <OrderConfirm />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

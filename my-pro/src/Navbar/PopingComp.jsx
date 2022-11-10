@@ -53,18 +53,20 @@ const PopingComp = () => {
   return (
     <VStack>
       {item.map((elem) => (
-        <NavLink key={elem.value} to={`/${elem.value}`}>
-        <HStack
-          _hover={{ cursor: "pointer" }}
-          p={1}
-          w="100%"
-          h="50px"
-          borderBottom="1px solid #CBD5E0"
-        >
-          <Image h="100%" src={elem.img} />
-          <Heading size="md">{elem.name}</Heading>
-        </HStack>
-        </NavLink>
+        <Box key={elem.value} border="0px solid" w="100%">
+          <NavLink to={`/${elem.value}`}>
+            <HStack
+              _hover={{ cursor: "pointer" }}
+              p={1}
+              w="100%"
+              h="50px"
+              borderBottom="1px solid #CBD5E0"
+            >
+              <Image h="100%" src={elem.img} />
+              <Heading size="md">{elem.name}</Heading>
+            </HStack>
+          </NavLink>
+        </Box>
       ))}
     </VStack>
   );

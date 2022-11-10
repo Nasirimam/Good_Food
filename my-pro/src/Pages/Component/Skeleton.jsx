@@ -14,7 +14,7 @@ const Skeletonitem = () => {
         mb={10}
       >
         {sekeleton.map((elem) => 
-          <Box padding="6" boxShadow="lg" bg="white" h='300px'>
+          <Box key={elem} padding="6" boxShadow="lg" bg="white" h='300px'>
             <SkeletonCircle size="40px" />
             <SkeletonText mt="4" noOfLines={6} spacing="4" />
           </Box>

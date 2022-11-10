@@ -57,7 +57,7 @@ const Category = () => {
       </Heading>
       <SimpleGrid columns={3} spacing={10}>
         {item.map((elem) => (
-          <NavLink key={elem.value} to={`/${elem.value}`}>
+          <NavLink key={elem.name} to={`/${elem.value}`}>
           <Box
             boxShadow="xl"
             bgColor="white"

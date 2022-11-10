@@ -7,6 +7,7 @@ import {
   Button,
   Center,
   Skeleton,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useContext } from "react";
@@ -17,7 +18,8 @@ import Skeletonitem from "./Component/Skeleton";
 
 const Product = () => {
   const param = useParams();
-  const {isAuth,setProduct,totalPrice} = useContext(AppContext)
+  const { isAuth, setProduct, cart, setTotal } = useContext(AppContext);
+  const toast = useToast();
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -32,15 +34,24 @@ const Product = () => {
   };
 
   useEffect(() => {
-    setLoding(true)
+    setLoding(true);
     getProduct(param.name);
-    setLoding(false)
-  }, [page,param]);
+    setLoding(false);
+  }, [page, param]);
 
   const addProduct = (elem) => {
-    setProduct(elem)
-    totalPrice(elem.price)
-  }
+    setProduct(elem);
+    toast({
+      title: `${elem.name} Added`,
+      status: "success",
+      isClosable: true,
+    });
+  };
+
+  const sum = cart.reduce((accumulator, object) => {
+    return accumulator + object.price;
+  }, 0);
+  setTotal(sum);
 
   if (loding) {
     return <Skeletonitem />;
@@ -67,7 +78,7 @@ const Product = () => {
               borderRadius={15}
               textAlign="justify"
             >
-              <Image w='100%' h='80%' src={elem.img} alt={elem.name} />
+              <Image w="100%" h="80%" src={elem.img} alt={elem.name} />
               <Heading size="md" pl={3}>
                 Name : {elem.name}
               </Heading>
@@ -77,16 +88,31 @@ const Product = () => {
               <Heading size="sm" pl={3}>
                 MRP : ${elem.price}
               </Heading>
-              <Button disabled={isAuth} onClick={()=>{addProduct(elem)}} >ADD TO CART</Button>
+              <Button
+                disabled={isAuth}
+                onClick={() => {
+                  addProduct(elem);
+                }}
+              >
+                ADD TO CART
+              </Button>
             </Box>
           ))}
         </SimpleGrid>
         <Center gap={5}>
-          <Button disabled={page <= 1} onClick={() => setPage(page - 1)+setLoding(true)}>
+          <Button
+            disabled={page <= 1}
+            onClick={() => setPage(page - 1) + setLoding(true)}
+          >
             Prev
           </Button>
           <Button>{page}</Button>
-          <Button disabled={data.length!=9} onClick={() => setPage(page + 1)+setLoding(true)}>Next</Button>
+          <Button
+            disabled={data.length != 9}
+            onClick={() => setPage(page + 1) + setLoding(true)}
+          >
+            Next
+          </Button>
         </Center>
       </Box>
     );
