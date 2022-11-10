@@ -9,12 +9,15 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { AppContext } from "../AuthContext/AuthContext";
 import Skeletonitem from "./Component/Skeleton";
 
 const Product = () => {
   const param = useParams();
+  const {isAuth,setProduct,totalPrice} = useContext(AppContext)
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -27,15 +30,17 @@ const Product = () => {
       .then((res) => res.json())
       .then((res) => setData(res));
   };
-//   console.log(loding)
 
   useEffect(() => {
     setLoding(true)
     getProduct(param.name);
     setLoding(false)
-  }, [page]);
+  }, [page,param]);
 
-  console.log(data)
+  const addProduct = (elem) => {
+    setProduct(elem)
+    totalPrice(elem.price)
+  }
 
   if (loding) {
     return <Skeletonitem />;
@@ -72,7 +77,7 @@ const Product = () => {
               <Heading size="sm" pl={3}>
                 MRP : ${elem.price}
               </Heading>
-              <Button>ADD TO CART</Button>
+              <Button disabled={isAuth} onClick={()=>{addProduct(elem)}} >ADD TO CART</Button>
             </Box>
           ))}
         </SimpleGrid>
