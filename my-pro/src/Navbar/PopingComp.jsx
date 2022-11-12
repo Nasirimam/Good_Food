@@ -53,7 +53,7 @@ const PopingComp = () => {
   return (
     <VStack>
       {item.map((elem) => (
-        <Box key={elem.value} border="0px solid" w="100%">
+        <Box key={elem.value} border="0px solid" w="100%" color='cyan.800'>
           <NavLink to={`/${elem.value}`}>
             <HStack
               _hover={{ cursor: "pointer" }}

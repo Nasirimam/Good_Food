@@ -93,8 +93,8 @@ function DrawerCart() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Heading size="md" mr={120}>
-              Total: ${total}
+            <Heading size="md" mr={90} color='cyan.400'>
+              <span style={{color:'#0987A0'}}>Total : $</span>{total}
             </Heading>
             <Button variant="outline" mr={4} onClick={onClose}>
               Back

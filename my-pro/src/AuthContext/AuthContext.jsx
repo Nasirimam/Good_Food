@@ -4,9 +4,10 @@ import { createContext } from "react";
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-  const [isAuth, setisAuth] = useState(false);
+  const [isAuth, setisAuth] = useState(true);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [users,setUsers] = useState(null)
 
   const Login = () => {
     setisAuth(false);
@@ -33,6 +34,8 @@ const AppContextProvider = ({ children }) => {
     setProduct,
     setTotal,
     setAfterDelete,
+    setUsers,
+    users
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

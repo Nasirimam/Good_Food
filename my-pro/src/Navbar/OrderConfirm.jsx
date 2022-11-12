@@ -7,6 +7,7 @@ import {
     AlertDialogOverlay,
     Button,
     useDisclosure,
+    createLocalStorageManager,
   } from '@chakra-ui/react'
   import React from 'react'
 import { useContext } from 'react'
@@ -17,7 +18,9 @@ function OrderConfirm() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
 
-    const {setAfterDelete,setTotal} = useContext(AppContext)
+    const {setAfterDelete,setTotal,cart,users} = useContext(AppContext)
+
+    // console.log(cart.length)
 
     const handleDelete = () => {
         setAfterDelete([])
@@ -26,7 +29,7 @@ function OrderConfirm() {
 
     return (
       <>
-        <Button bgColor='teal.300' onClick={()=>{onOpen();handleDelete()}}>
+        <Button disabled={cart.length<=0} bgColor='teal.300' onClick={()=>{onOpen();handleDelete()}}>
           Order
         </Button>
   
@@ -42,7 +45,7 @@ function OrderConfirm() {
               </AlertDialogHeader>
   
               <AlertDialogBody>
-                Your Food Gets Deliverd Soon
+                {users.name} Your Food Gets Deliverd Soon at {users.address}
               </AlertDialogBody>
   
               <AlertDialogFooter>
