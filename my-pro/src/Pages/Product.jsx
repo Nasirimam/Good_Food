@@ -8,26 +8,29 @@ import {
   Center,
   Skeleton,
   useToast,
+  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { AppContext } from "../AuthContext/AuthContext";
 import Skeletonitem from "./Component/Skeleton";
 
 const Product = () => {
   const param = useParams();
-  const { isAuth, setProduct, cart, setTotal } = useContext(AppContext);
+  const { isAuth, setProduct, cart, setTotal, query } = useContext(AppContext);
   const toast = useToast();
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loding, setLoding] = useState(true);
+  const [search, setSearch] = useSearchParams();
+  const [sort, setSort] = useState("");
 
   const getProduct = (para) => {
     return fetch(
-      `https://ig-food-menus.herokuapp.com/${para}?_limit=9&_page=${page}`
+      `https://ig-food-menus.herokuapp.com/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
     )
       .then((res) => res.json())
       .then((res) => setData(res));
@@ -37,7 +40,11 @@ const Product = () => {
     setLoding(true);
     getProduct(param.name);
     setLoding(false);
-  }, [page, param]);
+  }, [page, param, query, sort]);
+
+  useEffect(() => {
+    setSearch({ page, query, sort });
+  }, [page, query, sort]);
 
   const addProduct = (elem) => {
     setProduct(elem);
@@ -53,11 +60,24 @@ const Product = () => {
   }, 0);
   setTotal(sum);
 
+  const handleSorting = (e) => {
+    setSort(e.target.value);
+  };
+
   if (loding) {
     return <Skeletonitem />;
   } else {
     return (
       <Box>
+        <Flex w="90%" m="auto" border="0px solid" mt={5}>
+          <Center gap={5}>
+            <Select placeholder="Sort By Price" onChange={handleSorting}>
+              <option value="asc">Sort Low to High</option>
+              <option value="desc">Sort High To Low</option>
+            </Select>
+          </Center>
+        </Flex>
+
         <SimpleGrid
           columns={3}
           spacing={6}

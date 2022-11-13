@@ -13,8 +13,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import PopingComp from "./PopingComp";
-import {FaCubes} from 'react-icons/fa'
-
+import { FaCubes } from "react-icons/fa";
 
 const CatagoryPop = () => {
   return (

@@ -7,7 +7,8 @@ const AppContextProvider = ({ children }) => {
   const [isAuth, setisAuth] = useState(true);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
-  const [users,setUsers] = useState(null)
+  const [users, setUsers] = useState(null);
+  const [query, setqueery] = useState("");
 
   const Login = () => {
     setisAuth(false);
@@ -21,9 +22,13 @@ const AppContextProvider = ({ children }) => {
     setCart([...cart, data]);
   };
 
-  const setAfterDelete= (data) => {
-    setCart(data)
-  }
+  const setAfterDelete = (data) => {
+    setCart(data);
+  };
+
+  const setQueerydata = (data) => {
+    setqueery(data);
+  };
 
   const value = {
     isAuth,
@@ -35,7 +40,9 @@ const AppContextProvider = ({ children }) => {
     setTotal,
     setAfterDelete,
     setUsers,
-    users
+    users,
+    setQueerydata,
+    query,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

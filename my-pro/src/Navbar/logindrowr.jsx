@@ -40,15 +40,15 @@ function DrawerLogin() {
   const handleTosaveUser = () => {
     setUsers(user);
     Login();
-    setUser(intData)
+    setUser(intData);
   };
 
   const handleuserLogout = () => {
     Logout();
   };
 
-  console.log(isAuth);
-  console.log(users);
+  // console.log(isAuth);
+  // console.log(users);
 
   if (isAuth) {
     return (
@@ -102,8 +102,12 @@ function DrawerLogin() {
               <Button
                 onClick={handleTosaveUser}
                 colorScheme="blue"
-                disabled={user.number.length != 10 || user.name.length < 5 || user.address.length < 10}
-              > 
+                disabled={
+                  user.number.length != 10 ||
+                  user.name.length < 5 ||
+                  user.address.length < 10
+                }
+              >
                 Login
               </Button>
             </DrawerFooter>
@@ -132,17 +136,26 @@ function DrawerLogin() {
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader color='cyan.700' >Your Profile</DrawerHeader>
+            <DrawerHeader color="cyan.700">Your Profile</DrawerHeader>
 
             <DrawerBody>
-              <Box mb={3} color='cyan.400'>
-                <Heading size="lg"><span style={{color:'#0987A0'}}>Name : </span>{users.name}</Heading>
+              <Box mb={3} color="cyan.400">
+                <Heading size="lg">
+                  <span style={{ color: "#0987A0" }}>Name : </span>
+                  {users.name}
+                </Heading>
               </Box>
-              <Box mb={3}  color='cyan.400'>
-                <Heading size="md"><span style={{color:'#0987A0'}}>Address : </span>{users.address}</Heading>
+              <Box mb={3} color="cyan.400">
+                <Heading size="md">
+                  <span style={{ color: "#0987A0" }}>Address : </span>
+                  {users.address}
+                </Heading>
               </Box>
-              <Box mb={3}  color='cyan.400'>
-                <Heading size="md"><span style={{color:'#0987A0'}}>Number : </span>{users.number}</Heading>
+              <Box mb={3} color="cyan.400">
+                <Heading size="md">
+                  <span style={{ color: "#0987A0" }}>Number : </span>
+                  {users.number}
+                </Heading>
               </Box>
             </DrawerBody>
 

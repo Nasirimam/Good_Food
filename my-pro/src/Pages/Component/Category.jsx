@@ -1,5 +1,5 @@
 import { Box, Heading, SimpleGrid, Image } from "@chakra-ui/react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 const Category = () => {
   const item = [
@@ -58,19 +58,19 @@ const Category = () => {
       <SimpleGrid columns={3} spacing={10}>
         {item.map((elem) => (
           <NavLink key={elem.name} to={`/${elem.value}`}>
-          <Box
-            boxShadow="xl"
-            bgColor="white"
-            p={2}
-            h="250px"
-            border="0px solid"
-            borderRadius={15}
-          >
-            <Image w="100%" h="90%" src={elem.img} alt={elem.name} />
-            <Heading size={1} h="10%">
-              {elem.name}
-            </Heading>
-          </Box>
+            <Box
+              boxShadow="xl"
+              bgColor="white"
+              p={2}
+              h="250px"
+              border="0px solid"
+              borderRadius={15}
+            >
+              <Image w="100%" h="90%" src={elem.img} alt={elem.name} />
+              <Heading size={1} h="10%">
+                {elem.name}
+              </Heading>
+            </Box>
           </NavLink>
         ))}
       </SimpleGrid>

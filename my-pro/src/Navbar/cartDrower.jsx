@@ -25,7 +25,8 @@ function DrawerCart() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  const { cart, total, setAfterDelete, setTotal } = useContext(AppContext);
+  const { cart, total, setAfterDelete, setTotal, users } =
+    useContext(AppContext);
 
   const deleteItem = (id) => {
     let value = cart.filter((elem) => elem.id !== id);
@@ -36,6 +37,7 @@ function DrawerCart() {
     setTotal(sum);
   };
 
+  // console.log(users)
   return (
     <>
       <Button
@@ -43,6 +45,7 @@ function DrawerCart() {
         ref={btnRef}
         colorScheme="teal"
         onClick={onOpen}
+        disabled={users == null}
       >
         Cart
       </Button>
@@ -56,7 +59,7 @@ function DrawerCart() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Your Orders</DrawerHeader>
+          <DrawerHeader color="cyan.800">Your Orders</DrawerHeader>
 
           <DrawerBody>
             <VStack gap={3}>
@@ -72,11 +75,12 @@ function DrawerCart() {
                   gap={3}
                 >
                   <Image src={elem.img} alt={elem.name} w="20%" />
-                  <Heading size="xs" w="35%">
-                    Name: {elem.name}
+                  <Heading size="xs" w="35%" color="cyan.400">
+                    <span style={{ color: "#0987A0" }}>Name: </span>
+                    {elem.name}
                   </Heading>
-                  <Heading size="xs" w="20%">
-                    MRP: ${elem.price}
+                  <Heading size="xs" w="20%" color="red.400">
+                    <span style={{ color: "#0987A0" }}>MRP: </span>${elem.price}
                   </Heading>
                   <Button
                     onClick={() => {
@@ -93,8 +97,8 @@ function DrawerCart() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Heading size="md" mr={90} color='cyan.400'>
-              <span style={{color:'#0987A0'}}>Total : $</span>{total}
+            <Heading size="md" mr={90} color="red.500">
+              <span style={{ color: "#0987A0" }}>Total : </span>${total}
             </Heading>
             <Button variant="outline" mr={4} onClick={onClose}>
               Back
