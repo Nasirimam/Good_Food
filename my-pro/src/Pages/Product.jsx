@@ -30,7 +30,7 @@ const Product = () => {
 
   const getProduct = (para) => {
     return fetch(
-      `http://localhost:8080/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
+      `https://ig-food-menus.herokuapp.com/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
     )
       .then((res) => res.json())
       .then((res) => setData(res));
