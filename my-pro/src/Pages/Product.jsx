@@ -30,7 +30,7 @@ const Product = () => {
 
   const getProduct = (para) => {
     return fetch(
-      `https://ig-food-menus.herokuapp.com/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
+      `http://localhost:8080/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
     )
       .then((res) => res.json())
       .then((res) => setData(res));
@@ -43,8 +43,8 @@ const Product = () => {
   }, [page, param, query, sort]);
 
   useEffect(() => {
-    setSearch({ page, query, sort });
-  }, [page, query, sort]);
+    setSearch({ page });
+  }, [page]);
 
   const addProduct = (elem) => {
     setProduct(elem);
