@@ -22,15 +22,23 @@ const Product = () => {
   const { isAuth, setProduct, cart, setTotal, query } = useContext(AppContext);
   const toast = useToast();
 
+
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
+
   const [loding, setLoding] = useState(true);
   const [search, setSearch] = useSearchParams();
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("asc");
+  
+  const intCat = search.getAll("page")
+
+  const [page, setPage] = useState(intCat[0] || 1);
+
+
+  console.log(intCat)
 
   const getProduct = (para) => {
     return fetch(
-      `https://ig-food-menus.herokuapp.com/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
+      `https://adorable-bat-fatigues.cyclic.app/${para}?_limit=9&_page=${page}&q=${query}&_sort=price&_order=${sort}`
     )
       .then((res) => res.json())
       .then((res) => setData(res));
@@ -43,8 +51,14 @@ const Product = () => {
   }, [page, param, query, sort]);
 
   useEffect(() => {
-    setSearch({ page });
-  }, [page]);
+    const param = {};
+    param.page = page;
+    param._order = sort;
+    if (query) {
+      param.q = query;
+    }
+    setSearch(param);
+  }, [page, sort, query]);
 
   const addProduct = (elem) => {
     setProduct(elem);
