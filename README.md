@@ -26,5 +26,5 @@ Chakra UI (UI Styling Library) Styled-Components.
 Deployed Link : https://lovely-brioche-dc2cb9.netlify.app/
 
 
----
+----
 <h1 align="center">✨Thank You✨</h1>
