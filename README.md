@@ -23,7 +23,7 @@ Chakra UI (UI Styling Library) Styled-Components.
 
 
 ---
-Deployed Link : https://lovely-brioche-dc2cb9.netlify.app/
+Deployed Link : https://goodfoood.netlify.app/
 
 
 ----
